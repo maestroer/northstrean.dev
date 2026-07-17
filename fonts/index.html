@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aleksandr.Product</title>
+<meta name="description" content="senior product manager · 0→1 to pmf :3" />
+<style>
+  /* ---- локальные шрифты (self-hosted, без внешнего CDN) ---- */
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/jetbrains-mono-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/jetbrains-mono-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/jetbrains-mono-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/jetbrains-mono-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/jetbrains-mono-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/jetbrains-mono-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/jetbrains-mono-cyrillic-800-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+  @font-face{font-family:'Silkscreen';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/silkscreen-latin-700-normal.woff2) format('woff2');}
+  :root {
+    --bg:       #0d0f17;
+    --panel:    #1b1e29;
+    --fg:       #e6e9ef;
+    --muted:    #6b7280;
+    --dim:      #9aa2b1;
+    --line:     #3a3560;
+    --green:    #6ee787;
+    --blue:     #79b8ff;
+    --purple:   #bd93f9;
+    --pink:     #ff9ecb;
+    --cyan:     #7cf5c4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--bg);
+    color: var(--fg);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.55;
+    padding: 28px 16px 80px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* россыпь пиксельных надписей по бокам */
+  #scatter {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .scatter-item {
+    position: absolute;
+    font-family: 'Silkscreen', 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: #e9c9ff;
+    white-space: nowrap;
+    user-select: none;
+    letter-spacing: 1px;
+    transform-origin: center;
+    text-shadow: 0 0 1px rgba(233,201,255,.4);
+  }
+
+  .window {
+    position: relative;
+    z-index: 1;
+    max-width: 940px;
+    margin: 0 auto;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0,0,0,.6);
+  }
+
+  .titlebar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 11px 16px; border-bottom: 1px solid var(--line);
+    background: #16181f; font-size: 12.5px; color: var(--muted);
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .titlebar .center { flex: 1; text-align: center; color: var(--dim); }
+  .langbtn { margin-left: 10px; background: transparent; border: 1px solid var(--line); color: var(--purple); font: inherit; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 5px; cursor: pointer; letter-spacing: 1px; }
+  .langbtn:hover { border-color: var(--purple); }
+  @media (max-width: 480px){ #clock { display: none; } .titlebar .center { font-size: 11px; } }
+
+  .content { padding: 26px 26px 30px; }
+  @media (max-width: 620px){ .content { padding: 20px 16px 24px; } }
+
+  /* ---------- header ---------- */
+  .hero { display: flex; gap: 26px; flex-wrap: wrap; }
+  .ascii { color: var(--purple); font-size: 12px; line-height: 1.2; white-space: pre; margin: 2px 0; opacity: .9; }
+  .idcard { flex: 1; min-width: 300px; }
+  .idcard h1 { font-size: 19px; font-weight: 800; letter-spacing: -.3px; margin-bottom: 4px; }
+  .idcard h1 .at { color: var(--green); }
+  .idcard h1 .host { color: var(--purple); }
+  .rule { color: var(--line); letter-spacing: 2px; margin-bottom: 12px; overflow: hidden; white-space: nowrap; }
+
+  .kv { display: grid; grid-template-columns: 108px 1fr; row-gap: 6px; column-gap: 14px; }
+  .kv .k { color: var(--blue); font-weight: 500; }
+  .kv .v .muted { color: var(--muted); }
+  .grade b { color: var(--cyan); }
+  .swatch { display:inline-block; width:10px; height:10px; border-radius:2px; vertical-align:middle; margin-left:4px; }
+  .links a { color: var(--purple); text-decoration: none; margin-right: 10px; border-bottom: 1px dashed transparent; }
+  .links a:hover { border-bottom-color: var(--purple); }
+
+  /* ---------- command sections ---------- */
+  .cmd { margin-top: 34px; }
+  .cmd > .line { font-weight: 800; margin-bottom: 14px; }
+  .cmd > .line .p { color: var(--green); }
+  .cmd > .line .path { color: var(--blue); }
+  .cmd > .line .c { color: var(--fg); }
+  .comment { color: var(--muted); font-size: 13px; margin: 2px 0 14px; }
+  p.body-txt { color: var(--dim); margin: 8px 0; max-width: 720px; }
+  p.body-txt b { color: var(--purple); }
+
+  /* ---------- stats band (цифры) — вид excel-таблицы ---------- */
+  .statgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  @media (max-width: 720px){ .statgrid { grid-template-columns: repeat(2, 1fr); } }
+  .stat { border: 0; border-radius: 0; padding: 14px 16px; background: #14161f; }
+  .stat .num { font-size: 22px; font-weight: 800; color: var(--purple); line-height: 1.1; }
+  .stat .num.b, .stat .num.p { color: var(--purple); }
+  .stat .cap { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+  /* ---------- pills (metrics + skills) ---------- */
+  .pills { display: flex; flex-wrap: wrap; gap: 7px; }
+  .pill { font-size: 12px; font-weight: 700; color: var(--purple); border: 1px solid #3a3560; background: #1a1d2a; border-radius: 6px; padding: 3px 9px; }
+  .pill.b, .pill.p { color: var(--purple); border-color: #3a3560; background: #1a1d2a; }
+  .nda { color: var(--pink); }
+
+  /* ---------- project rows (1 per row) ---------- */
+  .proj { border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; background: #14161f; margin-bottom: 14px; }
+  .proj .h { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 3px; }
+  .proj .h .name { font-weight: 800; color: var(--fg); font-size: 15px; }
+  .proj .h .name em { color: var(--fg); font-style: normal; font-weight: 800; font-size: 12px; }
+  .proj .h .name em.nda { color: var(--pink); }
+  .proj .h .when { color: var(--muted); font-size: 12px; white-space: nowrap; font-weight: 600; }
+  .proj .role { color: var(--purple); font-size: 12.5px; margin-bottom: 8px; font-weight: 600; }
+  .proj p { color: var(--dim); font-size: 13px; margin-bottom: 12px; max-width: 760px; }
+
+  /* ---------- skills ---------- */
+  .taggroup { display: grid; grid-template-columns: 120px 1fr; gap: 10px 14px; align-items: start; margin: 10px 0; }
+  .taggroup .label { color: var(--muted); padding-top: 4px; font-weight: 600; }
+
+  /* tables */
+  table.grid { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  table.grid td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+  table.grid td.k { color: var(--purple); width: 130px; white-space: nowrap; font-weight: 600; }
+  table.grid td.v { color: var(--dim); }
+
+  footer.sig { margin-top: 40px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); padding-top: 16px; }
+  .cursor { display:inline-block; width:8px; height:15px; background: var(--green); vertical-align:-2px; margin-left:2px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- intro / loading ---------- */
+  #intro {
+    position: fixed; inset: 0; z-index: 200;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    transition: opacity .55s ease;
+  }
+  #intro.hide { opacity: 0; pointer-events: none; }
+  #intro .window { max-width: 560px; width: 100%; animation: rise .5s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .introprompt { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+  .introprompt b { color: var(--green); font-weight: 700; }
+  .introTitle {
+    font-size: clamp(30px, 6.5vw, 52px);
+    font-weight: 800; letter-spacing: -1px; line-height: 1.05;
+    background: linear-gradient(90deg, var(--green), var(--blue), var(--purple));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .typer { margin-top: 16px; color: var(--fg); font-size: 16px; font-weight: 600; min-height: 22px; }
+</style>
+</head>
+<body>
+<!-- intro / loading -->
+<div id="intro">
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="center">~/northstrean</span>
+    </div>
+    <div class="content">
+      <div class="introprompt"><b>$</b> whoami</div>
+      <h1 class="introTitle">Aleksandr</h1>
+      <div class="typer"><span id="introType"></span><span class="cursor"></span></div>
+    </div>
+  </div>
+</div>
+
+<div id="scatter" aria-hidden="true"></div>
+<div class="window">
+  <div class="titlebar">
+    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+    <span class="center">Aleksandr.Product ~ tmux</span>
+    <span id="clock">--:--:--</span>
+    <button id="langBtn" class="langbtn" type="button">RU</button>
+  </div>
+
+  <div class="content">
+
+    <!-- ===================== whoami ===================== -->
+    <div class="hero">
+      <pre class="ascii">
+        ^
+   pmf  |            ______
+        |         __/
+   grow |      __/
+        |   __/
+        |__/
+        +----------------------->
+         idea    mvp     scale
+      </pre>
+
+      <div class="idcard">
+        <h1>Aleksandr<span class="at">.</span><span class="host">Product</span></h1>
+        <div class="rule">────────────────────────────</div>
+        <div class="kv">
+          <div class="k" data-ru="я">whoami</div>   <div class="v">Aleksandr</div>
+          <div class="k" data-ru="должность">role</div>     <div class="v">senior product manager</div>
+          <div class="k" data-ru="в продукте">in product</div><div class="v" data-ru='5 лет'>5 years</div>
+          <div class="k" data-ru="локация">location</div> <div class="v" data-ru='сербия <span class="muted">·</span> белград <span class="muted">·</span> удалённо'>serbia <span class="muted">·</span> beograd <span class="muted">·</span> remote</div>
+          <div class="k" data-ru="языки">langs</div>    <div class="v">en (c1), ru (c2)</div>
+          <div class="k" data-ru="контакты">find me</div>  <div class="v links">
+            <a href="https://t.me/mercydetka" target="_blank" rel="noopener">[telegram]</a>
+            <a class="js-email" data-e="bm9ydGhzdHJlYW5AZ21haWwuY29t" href="#">[email]</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== цифры ===================== -->
+    <section class="cmd">
+      <div class="line"><span class="p">Aleksandr.Product</span><span class="path">:~$</span> <span class="c">stats.txt</span></div>
+      <div class="comment" data-ru="# пиковые метрики"># пиковые метрики</div>
+      <div class="statgrid">
+        <div class="stat"><div class="num">87</div><div class="cap" data-ru="пиковый pmf">peak pmf score</div></div>
+        <div class="stat"><div class="num p">$1.5M</div><div class="cap" data-ru="капитализация продукта">product capitalization</div></div>
+        <div class="stat"><div class="num b">540k</div><div class="cap" data-ru="mau под управлением">mau owned</div></div>
+        <div class="stat"><div class="num">82%</div><div class="cap" data-ru="лучший 30-дн. retention">best 30-day retention</div></div>
+        <div class="stat"><div class="num p">56%</div><div class="cap" data-ru="реферальная конверсия">referral conversion</div></div>
+        <div class="stat"><div class="num">5</div><div class="cap" data-ru="лет в продукте">years in product</div></div>
+      </div>
+    </section>
+
+    <!-- ===================== work.md ===================== -->
+    <section class="cmd">
+      <div class="line"><span class="p">Aleksandr.Product</span><span class="path">:~$</span> <span class="c">work.md</span></div>
+      <p class="body-txt" data-ru='<b>senior product manager</b> — независимый продуктовый консалтинг. веду продукты от идеи до product–market fit и измеримого роста: проверка гипотез и unit-экономики, воронки, retention, монетизация. решения на данных, не на интуиции.'>
+        <b>senior product manager</b> — independent product consulting. i take products from a raw idea to
+        product–market fit and measurable growth: hypothesis &amp; unit-economics validation, funnels,
+        retention, monetization, and a cross-functional team around it. decisions on data, not vibes.
+      </p>
+      <table class="grid">
+        <tr><td class="k" data-ru="стратегия">strategy</td><td class="v" data-ru="продуктовое видение, бэклог и roadmap end-to-end (квартал / полгода / 12 мес)">product vision, backlog &amp; end-to-end roadmap (quarter / half-year / 12mo)</td></tr>
+        <tr><td class="k" data-ru="рост">growth</td><td class="v" data-ru="воронки, retention/churn, unit-экономика (ltv, cac, arppu, clv), монетизация">funnels, retention/churn, unit-economics (ltv, cac, arppu, clv), monetization</td></tr>
+        <tr><td class="k" data-ru="дискавери">discovery</td><td class="v" data-ru="cjm, jtbd, custdev, исследование рынка и конкурентов, проверка гипотез / a-b">cjm, jtbd, custdev, market &amp; competitor research, hypothesis testing / a-b</td></tr>
+        <tr><td class="k" data-ru="деливери">delivery</td><td class="v" data-ru="кросс-функциональный лид — разработка, дизайн, аналитика, маркетинг, юристы · agile/scrum/kanban, okr">cross-functional lead — dev, design, analytics, marketing, legal · agile/scrum/kanban, okr</td></tr>
+        <tr><td class="k" data-ru="плюсы">edge</td><td class="v" data-ru="антифрод / trust and safety, ai-онбординг и поддержка, международные платежи (карта, крипто)">antifraud / trust &amp; safety, ai-driven onboarding &amp; support, intl payments (card, crypto)</td></tr>
+      </table>
+    </section>
+
+    <!-- ===================== проекты (1 на строку) ===================== -->
+    <section class="cmd">
+      <div class="line"><span class="p">Aleksandr.Product</span><span class="path">:~$</span> <span class="c">ls ~/projects</span></div>
+      <div class="comment" data-ru="# избранное. метрики реальные, часть названий скрыта по nda."># selected work. metrics are real, some names redacted under nda.</div>
+
+      <div class="proj">
+        <div class="h"><span class="name">Grimace <em>affiliate / cpa</em></span><span class="when" data-ru="окт 2021 — окт 2024">oct 2021 — oct 2024</span></div>
+        <div class="role" data-ru="продакт-менеджер · идея → pmf">product manager · idea → pmf</div>
+        <p data-ru="провёл глобальную cpa-платформу от гипотезы до pmf. воронка end-to-end, антифрод-правила, переиспользуемый транзакционный конструктор и геймификация retention.">drove a global cpa-traffic affiliate platform from hypothesis to pmf. built the funnel end-to-end, antifraud rules, a reusable transactional "constructor", and gamified retention.</p>
+        <div class="pills">
+          <span class="pill">pmf 84%</span><span class="pill p">cap $1.5M</span><span class="pill b">dau +80%</span><span class="pill b">mau 240k</span><span class="pill">d7 65%</span><span class="pill">d30 41%</span><span class="pill b">cac -25%</span><span class="pill">arppu $3.3</span><span class="pill">clv $19</span><span class="pill">csat 95%</span>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="h"><span class="name">TMA <em>mini-apps · tier-1 messenger</em></span><span class="when" data-ru="июл 2022 — ноя 2024">jul 2022 — nov 2024</span></div>
+        <div class="role" data-ru="продакт-менеджер · рост и платформа">product manager · growth &amp; platform</div>
+        <p data-ru="рост воронки экосистемы мини-приложений с многомиллионной глобальной аудиторией. количественные тесты в масштабе, документация api включая спецификацию TMA 2.0.">owned funnel growth for a mini-app ecosystem with a multi-million global audience. quantitative testing at scale, api docs incl. the TMA 2.0 spec.</p>
+        <div class="pills">
+          <span class="pill b">dau +60%</span><span class="pill b">arpu +22%</span><span class="pill">clv +35%</span><span class="pill">d30 52%</span><span class="pill p">pmf 87</span><span class="pill">sess len +25%</span><span class="pill">crash &lt;0.2%</span><span class="pill">load &lt;700ms</span>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="h"><span class="name" data-ru="B2B SaaS сегмент &lt;em&gt;e-commerce&lt;/em&gt;">B2B SaaS segment <em>e-commerce</em></span><span class="when" data-ru="ноя 2024 — сейчас">nov 2024 — now</span></div>
+        <div class="role" data-ru="senior продакт-менеджер · консалтинг">senior product manager · consulting</div>
+        <p data-ru="полное владение продуктом для e-commerce saas. downmarket-адаптация под smb, интеграция с 1С, внутренний мессенджер и витрина достижений, ai-онбординг, scrum и okr.">full product ownership for e-commerce saas. downmarket adaptation to smb, 1С integration, internal messenger + achievement showcase, ai-driven onboarding, scrum &amp; okr.</p>
+        <div class="pills">
+          <span class="pill">d30 retention 82%</span><span class="pill p">referral 56%</span><span class="pill b">funnel +35%</span><span class="pill">12-mo roadmap</span>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="h"><span class="name">VPN service <em class="nda">intl · nda</em></span></div>
+        <div class="role" data-ru="продакт-менеджер · консалтинг">product manager · consulting</div>
+        <p data-ru="международный vpn-продукт в условиях постоянных блокировок. альтернативный эквайринг и крипта как резервные платёжные каналы, сведённая unit-экономика, план на год с учётом регуляторных рисков.">ran an international vpn product under constant blocking. set up alt-acquiring + crypto as backup payment rails, closed unit-economics, planned a year ahead around regulatory risk.</p>
+        <div class="pills">
+          <span class="pill b">alt-acquiring</span><span class="pill b">crypto payments</span><span class="pill">unit-econ</span><span class="pill">risk roadmap</span>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="h"><span class="name">Litebox <em>client ai</em></span></div>
+        <div class="role" data-ru="продакт-менеджер · консалтинг">product manager · consulting</div>
+        <p data-ru="ai-поддержка клиентов до уровня l2 на gpt/claude api и rag поверх базы знаний. значительная доля тикетов закрывается без человека, время ответа ниже, csat выше.">designed &amp; shipped ai customer support up to l2 on gpt/claude api + rag over a knowledge base. big share of tickets closed without a human; response time down, csat up.</p>
+        <div class="pills">
+          <span class="pill">ai support l2</span><span class="pill b">rag</span><span class="pill">ticket deflection</span><span class="pill">csat ↑</span>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="h"><span class="name">MeditationSteps <em>mobile · subs</em></span></div>
+        <div class="role" data-ru="продакт-менеджер · 0→1">product manager · 0→1</div>
+        <p data-ru="запуск с нуля — от идеи до релиза. unit-экономика подписки, воронка привлечения/удержания, мультивалютные платежи (rub, fx, крипта).">launched from scratch — idea to release. subscription unit-economics, acquisition/retention funnel, multi-currency payments (rub, fx, crypto).</p>
+        <div class="pills">
+          <span class="pill">0→1 launch</span><span class="pill b">subscription</span><span class="pill">multi-currency</span>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="h"><span class="name">iGaming <em class="nda">top-10 · nda</em></span><span class="when" data-ru="консалтинг">consulting</span></div>
+        <div class="role" data-ru="продакт-менеджер · retention">product manager · retention</div>
+        <p data-ru="retention и вовлечение vip/whale-сегмента — прогрессия, лояльность и защитные механики против злоупотреблений на топ-уровне.">owned retention &amp; engagement for the vip/whale segment — progression, loyalty and protective mechanics preventing abuse of deposit/withdrawal at the top tier.</p>
+        <div class="pills">
+          <span class="pill">whale retention</span><span class="pill b">anti-abuse</span><span class="pill">churn ↓</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== cat education.txt ===================== -->
+    <section class="cmd">
+      <div class="line"><span class="p">Aleksandr.Product</span><span class="path">:~$</span> <span class="c">education.txt</span></div>
+      <table class="grid">
+        <tr><td class="k">2025</td><td class="v" data-ru="бакалавр — информационная безопасность телеком-систем · сгту им. гагарина">bachelor — information security of telecom systems · saratov state technical university (gagarin)</td></tr>
+      </table>
+    </section>
+
+    <!-- ===================== cat skills.txt (в конце) ===================== -->
+    <section class="cmd">
+      <div class="line"><span class="p">Aleksandr.Product</span><span class="path">:~$</span> <span class="c">skills.txt</span></div>
+
+      <div class="taggroup"><div class="label" data-ru="продукт:">product:</div><div class="pills">
+        <span class="pill p">b2b</span><span class="pill p">startups</span><span class="pill">0-1 pmf</span><span class="pill">ai</span><span class="pill">mobile</span><span class="pill">webview</span><span class="pill">web</span><span class="pill">native</span>
+      </div></div>
+      <div class="taggroup"><div class="label" data-ru="аналитика:">analytics:</div><div class="pills">
+        <span class="pill p">unit-economics</span><span class="pill b">ltv</span><span class="pill b">cac</span><span class="pill b">arppu</span><span class="pill b">clv</span><span class="pill">funnels</span><span class="pill">retention</span><span class="pill">churn</span><span class="pill">a/b tests</span>
+      </div></div>
+      <div class="taggroup"><div class="label" data-ru="ресёрч:">research:</div><div class="pills">
+        <span class="pill">cjm</span><span class="pill">jtbd</span><span class="pill">custdev</span><span class="pill">market research</span><span class="pill">competitor research</span>
+      </div></div>
+      <div class="taggroup"><div class="label" data-ru="доставка:">delivery:</div><div class="pills">
+        <span class="pill">scrum</span><span class="pill">agile</span><span class="pill">okr</span><span class="pill">waterfall</span><span class="pill">cross-func</span><span class="pill">leadership</span>
+      </div></div>
+      <div class="taggroup"><div class="label" data-ru="инструменты:">tools:</div><div class="pills">
+        <span class="pill p">sql</span><span class="pill p">clickhouse</span><span class="pill">google analytics</span><span class="pill">figma</span><span class="pill">miro</span><span class="pill">confluence</span><span class="pill">claude</span><span class="pill">figma make</span><span class="pill">cursor</span><span class="pill">grafana</span>
+      </div></div>
+    </section>
+
+    <!-- ===================== contact ===================== -->
+    <section class="cmd">
+      <div class="line"><span class="p">Aleksandr.Product</span><span class="path">:~$</span> <span class="c">./contact.sh</span></div>
+      <p class="body-txt links">
+        telegram <a href="https://t.me/mercydetka" target="_blank" rel="noopener">@mercydetka</a> &nbsp;·&nbsp;
+        email <a class="js-email" data-e="bm9ydGhzdHJlYW5AZ21haWwuY29t" data-show="1" href="#">email</a>
+      </p>
+      <p class="body-txt" data-ru='открыт к ролям senior pm в международных командах. строить продукты от 0 до pmf, экономику и стартапы — моё любимое дело<span class="cursor"></span>'>open to senior pm roles with international teams. building products from 0 to pmf, economics and startups are my favorite things<span class="cursor"></span></p>
+    </section>
+
+    <footer class="sig">© <span id="year"></span> Aleksandr</footer>
+  </div>
+</div>
+
+<script>
+  function tick(){
+    const d = new Date(); const p = n => String(n).padStart(2,'0');
+    const off = -d.getTimezoneOffset()/60; const tz = 'UTC' + (off>=0?'+':'') + off;
+    document.getElementById('clock').textContent = `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())} ${tz}`;
+  }
+  tick(); setInterval(tick, 1000);
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---- email собирается в рантайме (в исходнике адреса нет — защита от скрейпинга) ----
+  document.querySelectorAll('.js-email').forEach(function(a){
+    try {
+      const addr = atob(a.dataset.e);
+      a.setAttribute('href', 'mailto:' + addr);
+      if (a.dataset.show) a.textContent = addr;
+    } catch (e) {}
+  });
+
+  // ---- переключатель языка ru/en ----
+  (function(){
+    const btn = document.getElementById('langBtn');
+    if (!btn) return;
+    const nodes = document.querySelectorAll('[data-ru]');
+    nodes.forEach(el => { el.dataset.en = el.innerHTML; });
+    function apply(lang){
+      nodes.forEach(el => { el.innerHTML = lang === 'ru' ? el.dataset.ru : el.dataset.en; });
+      document.documentElement.lang = lang;
+      btn.textContent = lang === 'ru' ? 'EN' : 'RU';
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    let cur = 'en';
+    try { if (localStorage.getItem('lang') === 'ru') cur = 'ru'; } catch (e) {}
+    apply(cur);
+    btn.addEventListener('click', () => { cur = cur === 'ru' ? 'en' : 'ru'; apply(cur); });
+  })();
+
+  // ---- интро / загрузка ----
+  (function(){
+    const intro = document.getElementById('intro');
+    const out   = document.getElementById('introType');
+    if (!intro || !out) return;
+    const phrases = ['ping me anytime', 'lead product', 'you are welcome'];
+    const shuffle = a => a.slice().sort(() => Math.random() - 0.5);
+    let order = shuffle(phrases), pi = 0, ci = 0, del = false, done = false;
+
+    function type(){
+      if (done) return;
+      const cur = order[pi % order.length];
+      if (!del) {
+        out.textContent = cur.slice(0, ++ci);
+        if (ci === cur.length) { del = true; return setTimeout(type, 850); }
+      } else {
+        out.textContent = cur.slice(0, --ci);
+        if (ci === 0) { del = false; pi++; if (pi >= order.length) { order = shuffle(phrases); pi = 0; } }
+      }
+      setTimeout(type, del ? 34 : 68);
+    }
+    type();
+
+    function close(){
+      done = true;
+      intro.classList.add('hide');
+      setTimeout(() => intro.remove(), 650);
+    }
+    setTimeout(close, 3900);
+  })();
+
+  // ---- россыпь пиксельных надписей по боковым полям ----
+  (function(){
+    const words = ['Aleksandr', 'northstrean'];
+    const layer = document.getElementById('scatter');
+    function build(){
+      layer.innerHTML = '';
+      const vw = document.documentElement.clientWidth;
+      const contentW = 940;               // ширина окна
+      const gutter = (vw - contentW) / 2; // свободное поле с каждой стороны
+      if (gutter < 110) return;           // на узких экранах боков нет — пропускаем
+      const docH = Math.max(document.body.scrollHeight, window.innerHeight);
+      const leftMax  = gutter - 24;
+      const rightMin = vw - gutter + 24;
+      const perSide  = Math.max(8, Math.floor(docH / 78));
+
+      function make(side){
+        const el = document.createElement('span');
+        el.className = 'scatter-item';
+        el.textContent = words[(Math.random() * words.length) | 0];
+        const size = 9 + Math.random() * 15;
+        el.style.fontSize = size.toFixed(1) + 'px';
+        el.style.opacity  = (0.035 + Math.random() * 0.065).toFixed(3);
+        const roll = Math.random();
+        const rot  = roll < 0.18 ? 90 : roll > 0.82 ? -90 : (Math.random() * 56 - 28);
+        el.style.transform = 'rotate(' + rot.toFixed(1) + 'deg)';
+        el.style.top = (Math.random() * docH) + 'px';
+        if (side === 'left') {
+          el.style.left = (Math.random() * Math.max(6, leftMax - 60)) + 'px';
+        } else {
+          el.style.left = (rightMin + Math.random() * Math.max(6, vw - rightMin - 60)) + 'px';
+        }
+        layer.appendChild(el);
+      }
+      for (let i = 0; i < perSide; i++) { make('left'); make('right'); }
+    }
+    let t;
+    window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(build, 250); });
+    window.addEventListener('load', build);
+    build();
+  })();
+</script>
+</body>
+</html>

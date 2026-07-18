@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Aleksandr.Product</title>
 <meta name="description" content="senior product manager · 0→1 to pmf :3" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2316181f'/><path d='M11 11 L17 16 L11 21' fill='none' stroke='%236ee787' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/><rect x='18' y='19.3' width='7' height='2.6' rx='1.2' fill='%236ee787'/></svg>" />
 <style>
   /* ---- локальные шрифты (self-hosted, без внешнего CDN) ---- */
   @font-face{font-family:'JetBrains Mono';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
@@ -49,7 +50,7 @@
 
   /* россыпь пиксельных надписей по бокам */
   #scatter {
-    position: absolute; inset: 0;
+    position: absolute; top: 0; left: 0;
     width: 100%; height: 100%;
     overflow: hidden;
     z-index: 0;
@@ -241,7 +242,7 @@
     <!-- ===================== цифры ===================== -->
     <section class="cmd">
       <div class="line"><span class="p">Aleksandr.Product</span><span class="path">:~$</span> <span class="c">stats.txt</span></div>
-      <div class="comment" data-ru="# пиковые метрики"># пиковые метрики</div>
+      <div class="comment" data-ru="# пиковые метрики"># peak performance</div>
       <div class="statgrid">
         <div class="stat"><div class="num">87</div><div class="cap" data-ru="пиковый pmf">peak pmf score</div></div>
         <div class="stat"><div class="num p">$1.5M</div><div class="cap" data-ru="капитализация продукта">product capitalization</div></div>
@@ -262,78 +263,50 @@
       </p>
       <table class="grid">
         <tr><td class="k" data-ru="стратегия">strategy</td><td class="v" data-ru="продуктовое видение, бэклог и roadmap end-to-end (квартал / полгода / 12 мес)">product vision, backlog &amp; end-to-end roadmap (quarter / half-year / 12mo)</td></tr>
-        <tr><td class="k" data-ru="рост">growth</td><td class="v" data-ru="воронки, retention/churn, unit-экономика (ltv, cac, arppu, clv), монетизация">funnels, retention/churn, unit-economics (ltv, cac, arppu, clv), monetization</td></tr>
+        <tr><td class="k" data-ru="рост">growth</td><td class="v" data-ru="воронки, retention/churn, unit-экономика (ltv, cac, arppu, clv), монетизация и международные платежи (карта, крипто), ai-онбординг">funnels, retention/churn, unit-economics (ltv, cac, arppu, clv), monetization &amp; intl payments (card, crypto), ai-driven onboarding</td></tr>
         <tr><td class="k" data-ru="дискавери">discovery</td><td class="v" data-ru="cjm, jtbd, custdev, исследование рынка и конкурентов, проверка гипотез / a-b">cjm, jtbd, custdev, market &amp; competitor research, hypothesis testing / a-b</td></tr>
-        <tr><td class="k" data-ru="деливери">delivery</td><td class="v" data-ru="кросс-функциональный лид — разработка, дизайн, аналитика, маркетинг, юристы · agile/scrum/kanban, okr">cross-functional lead — dev, design, analytics, marketing, legal · agile/scrum/kanban, okr</td></tr>
-        <tr><td class="k" data-ru="плюсы">edge</td><td class="v" data-ru="антифрод / trust and safety, ai-онбординг и поддержка, международные платежи (карта, крипто)">antifraud / trust &amp; safety, ai-driven onboarding &amp; support, intl payments (card, crypto)</td></tr>
+        <tr><td class="k" data-ru="деливери">delivery</td><td class="v" data-ru="кросс-функциональный лид — разработка, дизайн, аналитика, маркетинг, юристы · agile/scrum/kanban, okr · антифрод / trust &amp; safety">cross-functional lead — dev, design, analytics, marketing, legal · agile/scrum/kanban, okr · antifraud / trust &amp; safety</td></tr>
       </table>
     </section>
 
     <!-- ===================== проекты (1 на строку) ===================== -->
     <section class="cmd">
       <div class="line"><span class="p">Aleksandr.Product</span><span class="path">:~$</span> <span class="c">ls ~/projects</span></div>
-      <div class="comment" data-ru="# избранное. метрики реальные, часть названий скрыта по nda."># selected work. metrics are real, some names redacted under nda.</div>
+      <div class="comment" data-ru="# избранное"># selected work</div>
 
       <div class="proj">
-        <div class="h"><span class="name">Grimace <em>affiliate / cpa</em></span><span class="when" data-ru="окт 2021 — окт 2024">oct 2021 — oct 2024</span></div>
-        <div class="role" data-ru="продакт-менеджер · идея → pmf">product manager · idea → pmf</div>
-        <p data-ru="провёл глобальную cpa-платформу от гипотезы до pmf. воронка end-to-end, антифрод-правила, переиспользуемый транзакционный конструктор и геймификация retention.">drove a global cpa-traffic affiliate platform from hypothesis to pmf. built the funnel end-to-end, antifraud rules, a reusable transactional "constructor", and gamified retention.</p>
+        <div class="h"><span class="name">Grimace <em>affiliate / cpa</em></span><span class="when" data-ru="окт 2021 — сен 2024 · 3 года">oct 2021 — sep 2024 · 3 yrs</span></div>
+        <div class="role" data-ru="продакт-менеджер · полный цикл, идея → pmf">product manager · full lifecycle, idea → pmf</div>
+        <p data-ru="полностью автоматизированный глобальный affiliate-сервис с cpa-сетью под капотом — провёл его от сырой гипотезы до найденного product–market fit за три года. вёл кросс-функциональные команды по agile и kanban, отвечал за discovery, планирование roadmap, построение cjm и глубинные custdev/jtbd-интервью с паблишерами, выстроил геймифицированную петлю удержания. капитализация проекта достигала $1.5M.">ran a fully-automated global affiliate service with a CPA network under the hood — took it from a raw hypothesis to found product–market fit over three years. led cross-functional teams on Agile &amp; Kanban; owned discovery, roadmap planning, CJM and deep CustDev/JTBD interviews with publishers; built a gamified retention loop. project capitalization reached $1.5M.</p>
         <div class="pills">
-          <span class="pill">pmf 84%</span><span class="pill p">cap $1.5M</span><span class="pill b">dau +80%</span><span class="pill b">mau 240k</span><span class="pill">d7 65%</span><span class="pill">d30 41%</span><span class="pill b">cac -25%</span><span class="pill">arppu $3.3</span><span class="pill">clv $19</span><span class="pill">csat 95%</span>
+          <span class="pill p">pmf 84%</span><span class="pill p">cap $1.5M</span><span class="pill b">dau +80%</span><span class="pill b">mau 240k</span><span class="pill">d7 65%</span><span class="pill">d30 41%</span><span class="pill b">cac -25%</span><span class="pill">ue +35%</span><span class="pill">arppu $3.3</span><span class="pill">clv $19</span><span class="pill">sl +30%</span><span class="pill">csat 95%</span><span class="pill">publishers csat 98%</span>
         </div>
       </div>
 
       <div class="proj">
-        <div class="h"><span class="name">TMA <em>mini-apps · tier-1 messenger</em></span><span class="when" data-ru="июл 2022 — ноя 2024">jul 2022 — nov 2024</span></div>
+        <div class="h"><span class="name">TMA <em>mini-apps · tier-1 messenger</em></span><span class="when" data-ru="июл 2022 — ноя 2024 · 2,5 года">jul 2022 — nov 2024 · 2.5 yrs</span></div>
         <div class="role" data-ru="продакт-менеджер · рост и платформа">product manager · growth &amp; platform</div>
-        <p data-ru="рост воронки экосистемы мини-приложений с многомиллионной глобальной аудиторией. количественные тесты в масштабе, документация api включая спецификацию TMA 2.0.">owned funnel growth for a mini-app ecosystem with a multi-million global audience. quantitative testing at scale, api docs incl. the TMA 2.0 spec.</p>
+        <p data-ru="рост воронки экосистемы telegram mini-apps (tma) с многомиллионной глобальной аудиторией. анализ рынка, планирование выката фич, грумминг бэклога и большой объём количественных тестов. участвовал в проектировании и описании api, включая спецификацию tma 2.0, и на основе анализа поведения пользователей и обратной связи интеграторов перестроил структуру документации так, чтобы она легко читалась и парсилась.">drove funnel growth for the Telegram mini-app (TMA) ecosystem — a multi-million global audience. market analysis, feature-rollout planning, backlog grooming and a large volume of quantitative tests. co-designed and documented the API incl. the TMA 2.0 spec, and rebuilt the docs structure data-driven from user behavior &amp; integrator feedback so it reads and parses cleanly.</p>
         <div class="pills">
-          <span class="pill b">dau +60%</span><span class="pill b">arpu +22%</span><span class="pill">clv +35%</span><span class="pill">d30 52%</span><span class="pill p">pmf 87</span><span class="pill">sess len +25%</span><span class="pill">crash &lt;0.2%</span><span class="pill">load &lt;700ms</span>
+          <span class="pill p">pmf 87</span><span class="pill b">dau +60%</span><span class="pill b">arpu +22%</span><span class="pill">clv +35%</span><span class="pill">d30 52%</span><span class="pill">sess len +25%</span><span class="pill">sess freq +18%</span><span class="pill">csat 93%</span><span class="pill">crash &lt;0.2%</span><span class="pill">load &lt;700ms</span>
         </div>
       </div>
 
       <div class="proj">
-        <div class="h"><span class="name" data-ru="B2B SaaS сегмент &lt;em&gt;e-commerce&lt;/em&gt;">B2B SaaS segment <em>e-commerce</em></span><span class="when" data-ru="ноя 2024 — сейчас">nov 2024 — now</span></div>
+        <div class="h"><span class="name">B2B SaaS segment <em>vladis · topseller · litebox · meditationsteps</em></span><span class="when" data-ru="ноя 2024 — сейчас">nov 2024 — now</span></div>
         <div class="role" data-ru="senior продакт-менеджер · консалтинг">senior product manager · consulting</div>
-        <p data-ru="полное владение продуктом для e-commerce saas. downmarket-адаптация под smb, интеграция с 1С, внутренний мессенджер и витрина достижений, ai-онбординг, scrum и okr.">full product ownership for e-commerce saas. downmarket adaptation to smb, 1С integration, internal messenger + achievement showcase, ai-driven onboarding, scrum &amp; okr.</p>
+        <p data-ru="продуктовая стратегия, growth и delivery для нескольких b2b saas-продуктов. в товароучётной saas для продавцов на маркетплейсах (topseller) поднял ключевые метрики через геймификацию, реферальные сценарии и ai-онбординг → 82% 30-дн. retention, 56% referral. в crm для агентств недвижимости (vladis) спроектировал внутренний мессенджер как core-workflow, провёл downmarket-адаптацию под smb и аудит legacy. litebox — ai-поддержка клиентов до уровня l2 на gpt/claude api + rag. плюс запуск 0→1 мобильного подписочного продукта (meditationsteps) с мультивалютными платежами.">product strategy, growth &amp; delivery across several B2B SaaS products. in a goods-accounting SaaS for marketplace sellers (Topseller) I lifted core metrics via gamification, referral scenarios and AI-assisted onboarding → 82% 30-day retention, 56% referral. in a real-estate CRM (Vladis) I designed an internal messenger as the core workflow, ran downmarket adaptation to SMB and a legacy audit. Litebox — AI customer support up to L2 on GPT/Claude API + RAG. plus a 0→1 mobile subscription launch (MeditationSteps) with multi-currency payments.</p>
         <div class="pills">
-          <span class="pill">d30 retention 82%</span><span class="pill p">referral 56%</span><span class="pill b">funnel +35%</span><span class="pill">12-mo roadmap</span>
+          <span class="pill">d30 retention 82%</span><span class="pill p">referral 56%</span><span class="pill b">funnel +35%</span><span class="pill">ai onboarding</span><span class="pill">internal messenger</span><span class="pill b">ai support l2</span><span class="pill">rag</span><span class="pill">0→1 subs</span><span class="pill">multi-currency</span><span class="pill">scrum · okr</span>
         </div>
       </div>
 
       <div class="proj">
-        <div class="h"><span class="name">VPN service <em class="nda">intl · nda</em></span></div>
+        <div class="h"><span class="name">Consulting <em class="nda">intl · nda</em></span><span class="when" data-ru="проектно">project-based</span></div>
         <div class="role" data-ru="продакт-менеджер · консалтинг">product manager · consulting</div>
-        <p data-ru="международный vpn-продукт в условиях постоянных блокировок. альтернативный эквайринг и крипта как резервные платёжные каналы, сведённая unit-экономика, план на год с учётом регуляторных рисков.">ran an international vpn product under constant blocking. set up alt-acquiring + crypto as backup payment rails, closed unit-economics, planned a year ahead around regulatory risk.</p>
+        <p data-ru="разовые и проектные консалтинговые задачи. международный vpn-продукт в условиях постоянных блокировок: альтернативный эквайринг и крипта как резервные платёжные каналы, сведённая unit-экономика, годовой план с учётом регуляторных рисков. iGaming top-10: retention и вовлечение vip/whale-сегмента — прогрессия, лояльность и защитные механики против злоупотреблений на топ-уровне.">one-off and project-based consulting engagements. an international VPN product under constant blocking: alt-acquiring + crypto as backup payment rails, closed unit-economics, a year-ahead plan around regulatory risk. a top-10 iGaming product: retention &amp; engagement for the VIP/whale segment — progression, loyalty and protective mechanics against abuse at the top tier.</p>
         <div class="pills">
-          <span class="pill b">alt-acquiring</span><span class="pill b">crypto payments</span><span class="pill">unit-econ</span><span class="pill">risk roadmap</span>
-        </div>
-      </div>
-
-      <div class="proj">
-        <div class="h"><span class="name">Litebox <em>client ai</em></span></div>
-        <div class="role" data-ru="продакт-менеджер · консалтинг">product manager · consulting</div>
-        <p data-ru="ai-поддержка клиентов до уровня l2 на gpt/claude api и rag поверх базы знаний. значительная доля тикетов закрывается без человека, время ответа ниже, csat выше.">designed &amp; shipped ai customer support up to l2 on gpt/claude api + rag over a knowledge base. big share of tickets closed without a human; response time down, csat up.</p>
-        <div class="pills">
-          <span class="pill">ai support l2</span><span class="pill b">rag</span><span class="pill">ticket deflection</span><span class="pill">csat ↑</span>
-        </div>
-      </div>
-
-      <div class="proj">
-        <div class="h"><span class="name">MeditationSteps <em>mobile · subs</em></span></div>
-        <div class="role" data-ru="продакт-менеджер · 0→1">product manager · 0→1</div>
-        <p data-ru="запуск с нуля — от идеи до релиза. unit-экономика подписки, воронка привлечения/удержания, мультивалютные платежи (rub, fx, крипта).">launched from scratch — idea to release. subscription unit-economics, acquisition/retention funnel, multi-currency payments (rub, fx, crypto).</p>
-        <div class="pills">
-          <span class="pill">0→1 launch</span><span class="pill b">subscription</span><span class="pill">multi-currency</span>
-        </div>
-      </div>
-
-      <div class="proj">
-        <div class="h"><span class="name">iGaming <em class="nda">top-10 · nda</em></span><span class="when" data-ru="консалтинг">consulting</span></div>
-        <div class="role" data-ru="продакт-менеджер · retention">product manager · retention</div>
-        <p data-ru="retention и вовлечение vip/whale-сегмента — прогрессия, лояльность и защитные механики против злоупотреблений на топ-уровне.">owned retention &amp; engagement for the vip/whale segment — progression, loyalty and protective mechanics preventing abuse of deposit/withdrawal at the top tier.</p>
-        <div class="pills">
-          <span class="pill">whale retention</span><span class="pill b">anti-abuse</span><span class="pill">churn ↓</span>
+          <span class="pill b">alt-acquiring</span><span class="pill b">crypto payments</span><span class="pill">unit-econ</span><span class="pill">risk roadmap</span><span class="pill">whale retention</span><span class="pill b">anti-abuse</span><span class="pill">churn ↓</span>
         </div>
       </div>
     </section>
@@ -405,16 +378,32 @@
     if (!btn) return;
     const nodes = document.querySelectorAll('[data-ru]');
     nodes.forEach(el => { el.dataset.en = el.innerHTML; });
-    function apply(lang){
+    let cur = 'en';
+    function apply(lang, persist){
+      cur = lang;
       nodes.forEach(el => { el.innerHTML = lang === 'ru' ? el.dataset.ru : el.dataset.en; });
       document.documentElement.lang = lang;
       btn.textContent = lang === 'ru' ? 'EN' : 'RU';
-      try { localStorage.setItem('lang', lang); } catch (e) {}
+      if (persist) { try { localStorage.setItem('lang', lang); } catch (e) {} }
+      window.dispatchEvent(new Event('langchange'));   // фоновые надписи перестроятся под новую высоту
     }
-    let cur = 'en';
-    try { if (localStorage.getItem('lang') === 'ru') cur = 'ru'; } catch (e) {}
-    apply(cur);
-    btn.addEventListener('click', () => { cur = cur === 'ru' ? 'en' : 'ru'; apply(cur); });
+    function stored(){ try { return localStorage.getItem('lang'); } catch (e) { return null; } }
+
+    const saved = stored();
+    if (saved === 'ru' || saved === 'en') {
+      apply(saved, false);                             // уважаем ручной выбор пользователя
+    } else {
+      apply('en', false);                              // по умолчанию английская, пока не пришла геолокация
+      // определяем страну по IP: из россии — показываем русскую версию (пока язык не выбран вручную)
+      const detect = fetch('https://get.geojs.io/v1/ip/country.json')
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(d => (d && d.country) || '')
+        .catch(() => fetch('https://ipapi.co/country/').then(r => r.ok ? r.text() : '').catch(() => ''));
+      const ruCountries = ['RU', 'BY', 'KZ'];   // россия, беларусь, казахстан → русская версия
+      detect.then(c => { if (ruCountries.indexOf((c || '').trim()) !== -1 && !stored()) apply('ru', false); });
+    }
+
+    btn.addEventListener('click', () => { apply(cur === 'ru' ? 'en' : 'ru', true); });
   })();
 
   // ---- интро / загрузка ----
@@ -422,7 +411,7 @@
     const intro = document.getElementById('intro');
     const out   = document.getElementById('introType');
     if (!intro || !out) return;
-    const phrases = ['ping me anytime', 'lead product', 'you are welcome'];
+    const phrases = ['ping me anytime', 'senior pm', 'you are welcome', 'cats are meowing', 'Aleksandr is working'];
     const shuffle = a => a.slice().sort(() => Math.random() - 0.5);
     let order = shuffle(phrases), pi = 0, ci = 0, del = false, done = false;
 
@@ -458,7 +447,8 @@
       const contentW = 940;               // ширина окна
       const gutter = (vw - contentW) / 2; // свободное поле с каждой стороны
       if (gutter < 110) return;           // на узких экранах боков нет — пропускаем
-      const docH = Math.max(document.body.scrollHeight, window.innerHeight);
+      const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, window.innerHeight);
+      layer.style.height = docH + 'px';   // растягиваем слой на всю страницу, а не только на экран
       const leftMax  = gutter - 24;
       const rightMin = vw - gutter + 24;
       const perSide  = Math.max(8, Math.floor(docH / 78));
@@ -484,8 +474,10 @@
       for (let i = 0; i < perSide; i++) { make('left'); make('right'); }
     }
     let t;
-    window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(build, 250); });
+    const rebuild = function(){ clearTimeout(t); t = setTimeout(build, 250); };
+    window.addEventListener('resize', rebuild);
     window.addEventListener('load', build);
+    window.addEventListener('langchange', rebuild);   // высота меняется при смене языка (кнопка или геолокация)
     build();
   })();
 </script>

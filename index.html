@@ -785,19 +785,37 @@
     toast.textContent = msg; toast.classList.add('show');
     clearTimeout(toastT); toastT = setTimeout(function(){ toast.classList.remove('show'); }, 1800);
   }
-  document.getElementById('copyEmail').addEventListener('click', function(){
-    var btn = this;
-    function done(){
-      btn.classList.add('done');
+  // копирование: clipboard api, а если он недоступен или отказал (http, webview, старый safari) — через скрытый textarea
+  function copyText(text){
+    function legacy(){
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+      document.body.appendChild(ta);
+      ta.select(); ta.setSelectionRange(0, text.length);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      return ok ? Promise.resolve() : Promise.reject();
+    }
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).catch(legacy);
+    return legacy();
+  }
+  var copyBtn = document.getElementById('copyEmail');
+  function copyEmail(e){
+    if (e) e.preventDefault();
+    copyText(EMAIL).then(function(){
+      copyBtn.classList.add('done');
       showToast(document.documentElement.lang === 'ru' ? 'Email скопирован' : 'Email copied');
-      setTimeout(function(){ btn.classList.remove('done'); }, 1800);
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(EMAIL).then(done, function(){ location.href = 'mailto:' + EMAIL; });
-    } else {
-      location.href = 'mailto:' + EMAIL;
-    }
-  });
+      setTimeout(function(){ copyBtn.classList.remove('done'); }, 1800);
+    }, function(){
+      location.href = 'mailto:' + EMAIL;            // скопировать не вышло совсем — открываем почтовый клиент
+    });
+  }
+  // клик по кнопке копирования и по любой email-ссылке копирует адрес
+  copyBtn.addEventListener('click', copyEmail);
+  document.querySelectorAll('.js-email').forEach(function(a){ a.addEventListener('click', copyEmail); });
 
   // ---- вкладки проектов ----
   (function(){
@@ -839,19 +857,29 @@
       placeAll();                                      // ширина кнопок меняется вместе с текстом
     }
 
-    var saved = stored('lang');
-    if (saved === 'ru' || saved === 'en') {
-      apply(saved, false);                             // уважаем ручной выбор пользователя
-    } else {
-      apply('en', false);                              // по умолчанию английская, пока не пришла геолокация
-      // определяем страну по IP: из россии — показываем русскую версию (пока язык не выбран вручную)
-      var detect = fetch('https://get.geojs.io/v1/ip/country.json')
-        .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
-        .then(function(d){ return (d && d.country) || ''; })
-        .catch(function(){ return fetch('https://ipapi.co/country/').then(function(r){ return r.ok ? r.text() : ''; }).catch(function(){ return ''; }); });
-      var ruCountries = ['RU', 'BY', 'KZ'];   // россия, беларусь, казахстан → русская версия
-      detect.then(function(c){ if (ruCountries.indexOf((c || '').trim()) !== -1 && !stored('lang')) apply('ru', false); });
+    // регион по часовому поясу браузера: россия и снг → русский, остальные → английский.
+    // работает офлайн и без внешних сервисов, vpn не мешает (пояс берётся из системы)
+    function detectLang(){
+      var cis = [
+        // россия
+        'Europe/Moscow','Europe/Kaliningrad','Europe/Samara','Europe/Volgograd','Europe/Saratov','Europe/Ulyanovsk',
+        'Europe/Astrakhan','Europe/Kirov','Europe/Simferopol','Asia/Yekaterinburg','Asia/Omsk','Asia/Novosibirsk',
+        'Asia/Barnaul','Asia/Tomsk','Asia/Novokuznetsk','Asia/Krasnoyarsk','Asia/Irkutsk','Asia/Chita','Asia/Yakutsk',
+        'Asia/Khandyga','Asia/Vladivostok','Asia/Ust-Nera','Asia/Magadan','Asia/Sakhalin','Asia/Srednekolymsk',
+        'Asia/Kamchatka','Asia/Anadyr',
+        // снг: беларусь, казахстан, кыргызстан, таджикистан, узбекистан, армения, азербайджан, молдова, туркменистан
+        'Europe/Minsk','Asia/Almaty','Asia/Qostanay','Asia/Qyzylorda','Asia/Aqtobe','Asia/Aqtau','Asia/Atyrau','Asia/Oral',
+        'Asia/Bishkek','Asia/Dushanbe','Asia/Tashkent','Asia/Samarkand','Asia/Yerevan','Asia/Baku','Europe/Chisinau',
+        'Asia/Ashgabat'
+      ];
+      var tz = '';
+      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+      if (tz) return cis.indexOf(tz) !== -1 ? 'ru' : 'en';
+      return /^(ru|be|kk)/i.test(navigator.language || '') ? 'ru' : 'en';   // пояс неизвестен — смотрим язык браузера
     }
+
+    var saved = stored('lang');
+    apply(saved === 'ru' || saved === 'en' ? saved : detectLang(), false);   // ручной выбор важнее автоопределения
 
     btns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.dataset.lang, true); }); });
   })();
